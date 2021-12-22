@@ -65,16 +65,12 @@ sudo systemctl start docker
 
 #### 安装 Gitlab
 
-直接运行下面的命令快速安装应用。如果你熟悉 Docker，建议先修改 [docker-compose](docker-compose-production.yml) 文件以满足自己的需求
+直接运行下面的命令快速安装应用。如果你熟悉 Docker，建议先修改 [docker-compose](docker-compose.yml) 文件以满足自己的需求
 
 ```
 git clone --depth=1 https://github.com/Websoft9/docker-gitlab
 cd docker-gitlab
-echo aaa  
-echo bbb  
-# .env文件的SITE_NAME需要修改成公网IP或者域名才能被外网访问  
-# 默认启动的是ERPNext12，如果您想运行ERPNext13,只需将ERPNEXT_VERSION、FRAPPE_VERSION修改成v13  
-sudo docker-compose -f docker-compose.yml --env-file .env up -d
+sudo docker-compose up -d
 ```
 
 ### 常见问题
@@ -88,15 +84,12 @@ sudo docker-compose -f docker-compose.yml --env-file .env up -d
 修改 [docker-compose](docker-compose.yml) 文件中冲突的端口，然后再启动容器
 
 
-#### 问题1  
-答案1  
-
-#### 问题2  
-答案2  
+#### 如何获得默认的登录密码？  
+运行 sudo docker exec -it gitlab grep 'Password:' /etc/gitlab/initial_root_password 命令获取  
 
 ### 使用说明
 
-启动应用后，本地浏览器访问 URL: *`http://服务器公网IP:9002`* 进入应用。  
+启动应用后，本地浏览器访问 URL: *`http://服务器公网IP:9001`* 进入应用。  
 
 下面是使用过程中可能需要的信息
 
@@ -106,14 +99,13 @@ sudo docker-compose -f docker-compose.yml --env-file .env up -d
 
 | 用户名    | 密码 |
 | ------- | -------- |
-|  admin | 123456  |
+|  root | GitLab 登录界面可见后，运行命令 sudo docker exec -it gitlab grep 'Password:' /etc/gitlab/initial_root_password 获取  |
 
 #### 服务和端口
 
 | 名称 | 端口号 | 用途 |  必要性 |
 | --- | --- | --- | --- |
-| gitlab-server | 9002 | 浏览器访问 Gitlab | Y |
-| phpmyadmin | 9090 | 数据库可视化管理工具 | Y |
+| gitlab-server | 9001 | 浏览器访问 Gitlab | Y |
 ## 文档
 
 [Gitlab 管理员手册](https://support.websoft9.com/docs/gitlab)
