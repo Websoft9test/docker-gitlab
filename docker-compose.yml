@@ -13,6 +13,7 @@ services:
     environment:
       GITLAB_OMNIBUS_CONFIG: |
         # external_url ${DOMAIN}
+        gitlab_rails['gitlab_shell_ssh_port'] = 22
         # Add any other gitlab.rb configuration here, each on its own line
         # other
     stdin_open: true
