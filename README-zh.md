@@ -57,10 +57,9 @@ sudo bash install-gitlab
 
 ```
 curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh
-curl -L "https://github.com/docker/compose/releases/download/1.29.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-ln -sf /usr/local/bin/docker-compose  /usr/bin
+sudo systemctl enable docker
 sudo systemctl start docker
+alias docker-compose='docker compose'
 ```
 
 #### 安装 Gitlab
@@ -83,13 +82,11 @@ sudo docker-compose up -d
 
 修改 [docker-compose](docker-compose.yml) 文件中冲突的端口，然后再启动容器
 
-
 #### 如何获得默认的登录密码？  
 运行 sudo docker exec -it gitlab grep 'Password:' /etc/gitlab/initial_root_password 命令获取  
-
 ### 使用说明
 
-启动应用后，本地浏览器访问 URL: *`http://服务器公网IP:9001`* 进入应用。  
+启动应用后，本地浏览器访问 URL: *`http://服务器公网IP:端口`* 进入应用。  
 
 下面是使用过程中可能需要的信息
 
