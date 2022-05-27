@@ -1,9 +1,4 @@
-## About
-
-This repository is forked from gitlabhq/omnibus-gitlab, we have the following modifications are provided
-
-* replace README.md
-* add README-zh.md, CHANGELOG.md, Notes.md, docker-compose-production.yml, .github folder
+# GitLab
 
 ### 安装
 
