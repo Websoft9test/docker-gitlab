@@ -15,7 +15,7 @@ Gitlab 最少需要开放两个端口：HTTP 和 SSH 端口，其中 SSH 端口�
 
 ### 配置
 
-可以通过环境变量传递配置，也可以修改 gitlab.rb 配置文件
+可以通过GITLAB_OMNIBUS_CONFIG 环境变量传递配置，也可以修改 gitlab.rb 配置文件
 
 ### 数据库
 

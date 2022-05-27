@@ -1,5 +1,4 @@
 # https://hub.docker.com/r/gitlab/gitlab-ce
-# command export APP_DISTRIBUTION=ee to cover the default gitlab-ce
 # postgresql is in this container
 
 version: '3.8'
@@ -7,26 +6,39 @@ version: '3.8'
 services:
 
   gitlab:
-    image: gitlab/gitlab-${APP_DISTRIBUTION}:${APP_VERSION}
-    container_name: "${APP_CONTAINER_NAME}"
-    hostname: "${DOMAIN}"
+    image: gitlab/gitlab-$APP_EDITION:$APP_VERSION
+    container_name: "$APP_NAME"
+    hostname: "$APP_DOMAIN"
     environment:
       GITLAB_OMNIBUS_CONFIG: |
-        # external_url ${DOMAIN}
+        # external_url $APP_DOMAIN
         gitlab_rails['gitlab_shell_ssh_port'] = 22
         # Add any other gitlab.rb configuration here, each on its own line
         # other
-    stdin_open: true
-    tty: true
+    shm_size: '256m'
     restart: always
     ports:
       - '9001:80'
       - '23:22'
     volumes:
-      - ${VOLUMES_PATH_PREFIX}/gitlab/config:/etc/gitlab
-      - ${VOLUMES_PATH_PREFIX}/gitlab/logs:/var/log/gitlab
-      - ${VOLUMES_PATH_PREFIX}/gitlab/data:/var/opt/gitlab
+      - gitlab_config:/etc/gitlab
+      - gitlab_logs:/var/log/gitlab
+      - gitlab_data:/var/opt/gitlab
+
+  runner:
+    image: gitlab/gitlab-runner:latest
+    container_name: $APP_NAME-runner
+    restart: always
+    volumes:
+      - gitlab_runner:/etc/gitlab-runner
+      - /var/run/docker.sock:/var/run/docker.sock
 
 networks:
   default:
-      name: ${APP_NETWORK}
+      name: $APP_NAME
+
+volumes:
+  gitlab_config:
+  gitlab_logs:
+  gitlab_data:
+  gitlab_runner:
