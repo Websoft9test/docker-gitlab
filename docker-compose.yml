@@ -9,7 +9,7 @@ services:
   gitlab:
     image: gitlab/gitlab-$APP_EDITION:$APP_VERSION
     container_name: "$APP_NAME"
-    hostname: "$APP_DOMAIN"
+    hostname: "$APP_URL"
     environment:
       GITLAB_OMNIBUS_CONFIG: |
         # external_url $APP_DOMAIN
