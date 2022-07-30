@@ -1,7 +1,7 @@
 {
   "name": "gitlab",
   "trademark": "Gitlab",
-  "installpath": "/data/wwwroot/gitlab",
+  "installpath": "/data/apps/gitlab",
   "compose_file": "docker-compose.yml",
   "fork_url": "https://github.com/gitlabhq/omnibus-gitlab",
   "env_file": ".env",
