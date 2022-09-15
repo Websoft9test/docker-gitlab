@@ -9,10 +9,10 @@ services:
   gitlab:
     image: gitlab/gitlab-$APP_EDITION:$APP_VERSION
     container_name: "$APP_NAME"
-    hostname: "$APP_URL"
+    # hostname: "$APP_URL"
     environment:
       GITLAB_OMNIBUS_CONFIG: |
-        # external_url $APP_DOMAIN
+        external_url '$APP_URL'
         gitlab_rails['gitlab_shell_ssh_port'] = 22
         # Add any other gitlab.rb configuration here, each on its own line
         # other
